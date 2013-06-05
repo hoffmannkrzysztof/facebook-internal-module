@@ -1,1 +1,31 @@
-This file was created by PyCharm 2.7.2 for binding GitHub repository
+
+
+
+urlpatterns = patterns('',
+    url(r'^facebook/', include('extfacebook.urls')),
+)
+
+
+MIDDLEWARE_CLASSES = (
+    'extwebsite.middleware.CurrentSiteOptions',
+
+  ........
+
+    'extfacebook.middleware.ActiveUserMiddleware',
+    'extfacebook.middleware.FacebookFanpageOptions'
+)
+
+AUTH_USER_MODEL = 'extfacebook.ExtendedUser'
+
+AUTHENTICATION_BACKENDS = (
+    'extfacebook.backend.FacebookBackend',
+)
+
+INSTALLED_APPS = (
+
+...................
+
+    'extfacebook',
+    'extwebsite',
+    'south'
+)
