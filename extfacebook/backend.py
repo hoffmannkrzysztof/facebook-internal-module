@@ -4,9 +4,9 @@ import urlparse
 from django.core.urlresolvers import reverse
 
 from django.utils import timezone
-from extfacebook.exceptions import FacebookAuthBadCodeException
+from exceptions import FacebookAuthBadCodeException
+from settings import FACEBOOK_AUTH_PERMISSION
 from models import ExtendedUser
-
 
 class FacebookBackend:
     def authenticate(self, token=None, request=None):
@@ -30,7 +30,6 @@ class FacebookBackend:
         else:
             response = urlparse.parse_qs(target.read())
             access_token = response['access_token'][-1]
-
 
         fb_profile = urllib.urlopen('https://graph.facebook.com/me?access_token=%s' % access_token)
         fb_profile = json.load(fb_profile)

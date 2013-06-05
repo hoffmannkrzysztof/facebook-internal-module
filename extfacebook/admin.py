@@ -1,5 +1,5 @@
 from django.contrib import admin
-from models import FacebookFanpage, ExtendedUser
+from models import FacebookFanpage, ExtendedUser, FacebookPost
 
 
 class ExtendedUserAdmin(admin.ModelAdmin):
@@ -11,6 +11,10 @@ class ExtendedUserAdmin(admin.ModelAdmin):
 class FacebookFanpageAdmin(admin.ModelAdmin):
     list_display = ('fanpage_url', 'is_valid')
 
+class FacebookPostAdmin(admin.ModelAdmin):
+    list_display = ('id','user','post_id','is_deleted','is_finished','created_at','modified_at','delete_after','error_delete')
+    list_filter = ('created_at','is_deleted','is_finished','delete_after')
 
 admin.site.register(FacebookFanpage, FacebookFanpageAdmin)
 admin.site.register(ExtendedUser, ExtendedUserAdmin)
+admin.site.register(FacebookPost,FacebookPostAdmin)

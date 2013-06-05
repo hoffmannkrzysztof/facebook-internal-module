@@ -20,6 +20,7 @@ class ExtendedUser(models.Model):
     last_login = models.DateTimeField(_('last login'), default=timezone.now)
     raw_facebook_profile = models.TextField(null=True, blank=True)
 
+
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = []
 
@@ -64,3 +65,13 @@ class FacebookFanpage(models.Model):
     fanpage_url = models.CharField(max_length=1000)
     is_valid = models.BooleanField(default=True)
 
+
+class FacebookPost(models.Model):
+    user = models.ForeignKey(ExtendedUser)
+    post_id = models.CharField(max_length=1000)
+    is_deleted = models.BooleanField(default=False)
+    is_finished = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    modified_at = models.DateTimeField(auto_now=True)
+    delete_after = models.DateTimeField()
+    error_delete = models.CharField(max_length=1000,null=True,blank=True)

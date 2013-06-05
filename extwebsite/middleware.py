@@ -24,7 +24,12 @@ class CurrentSiteOptions(object):
                 is_valid=True
             )
         except Website.DoesNotExist:
-            website = Website.objects.filter(is_valid=True).order_by("?")[0]
+
+            try:
+                website = Website.objects.filter(is_valid=True).order_by("?")[0]
+            except IndexError:
+                return None
+
             return HttpResponseRedirect("http://" + website.domain + request.path)
 
         request.website = website

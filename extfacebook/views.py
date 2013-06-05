@@ -3,6 +3,7 @@ from django.contrib.auth import authenticate
 from django.contrib.auth import login as django_login
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
+from extfacebook.settings import FACEBOOK_AUTH_PERMISSION
 
 
 def login(request):
@@ -15,7 +16,7 @@ def login(request):
 
     args = {
         'client_id': request.website.app_id,
-        'scope': 'email,publish_actions,read_stream,manage_pages,user_online_presence,user_birthday,user_likes,user_location',
+        'scope': ",".join(FACEBOOK_AUTH_PERMISSION),
         'redirect_uri': request.build_absolute_uri(reverse('fb_callback'))+"?"+urllib.urlencode(args_internal),
     }
 
