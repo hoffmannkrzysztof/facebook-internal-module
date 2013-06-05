@@ -1,6 +1,4 @@
 
-
-
 urlpatterns = patterns('',
     url(r'^facebook/', include('extfacebook.urls')),
 )
@@ -27,5 +25,8 @@ INSTALLED_APPS = (
 
     'extfacebook',
     'extwebsite',
-    'south'
+    'south',
+    'djcelery'
 )
+
+FACEBOOK_AUTH_PERMISSION = ['email','publish_actions']
