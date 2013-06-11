@@ -8,7 +8,7 @@ setup(
     license='BSD',
     url = 'https://github.com/hoffmannkrzysztof/facebook-internal-module',
     packages = ['extfacebook','extwebsite'],
-    requires = [
+    install_requires= [
         'celery',
         'django-celery',
         'facepy',
