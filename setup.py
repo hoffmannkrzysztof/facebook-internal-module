@@ -12,6 +12,6 @@ setup(
         'celery',
         'django-celery',
         'facepy',
-        'dateutil'
+        'python-dateutil'
     ],
     )
