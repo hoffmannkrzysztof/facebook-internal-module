@@ -1,4 +1,7 @@
+# coding=utf-8
+
 import urllib
+from django.contrib import messages
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as django_login
 from django.core.urlresolvers import reverse
@@ -24,12 +27,16 @@ def login(request):
 
 
 def callback(request):
+    if request.GET.get('error',None) is not None:
+        messages.error(request,u'Wystąpił błąd podczas autoryzacji lub rejestracja została anulowana. Spróbuj ponownie.')
+        return HttpResponseRedirect(request.GET.get('internal_redirect', '/'))
+
     code = request.GET.get('code', None)
     user = authenticate(token=code, request=request)
     django_login(request, user)
     request.user = user
 
-    return HttpResponseRedirect(request.GET['internal_redirect'])
+    return HttpResponseRedirect(request.GET.get('internal_redirect', '/'))
 
 
 
