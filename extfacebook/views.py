@@ -11,7 +11,7 @@ from extfacebook.settings import FACEBOOK_AUTH_PERMISSION
 
 def login(request):
 
-    internal_redirect = request.GET.get('internal_redirect', '/')
+    internal_redirect = request.GET.get('internal_redirect', request.GET.get('next', '/'))
 
     args_internal = {
         'internal_redirect': request.build_absolute_uri( internal_redirect )
