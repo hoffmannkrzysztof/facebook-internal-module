@@ -12,7 +12,7 @@ class FacebookBackend:
     def authenticate(self, token=None, request=None):
 
         args_internal = {
-            'internal_redirect': request.build_absolute_uri( request.GET['internal_redirect'] )
+            'internal_redirect': request.build_absolute_uri( request.GET.get('internal_redirect','/') )
         }
 
         args = {
