@@ -1,5 +1,6 @@
 from django.http import HttpResponseRedirect
 from django.template.loader import add_to_builtins
+from urlparse import urlparse
 
 from models import Website
 
@@ -17,6 +18,7 @@ class CurrentSiteOptions(object):
 
         if host.startswith("www."):
             host = host.replace("www.", "")
+        host = urlparse("http://"+host).hostname
 
         try:
             website = Website.objects.get(
