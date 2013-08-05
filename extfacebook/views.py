@@ -35,6 +35,7 @@ def callback(request):
     user = authenticate(token=code, request=request)
     django_login(request, user)
     request.user = user
+    messages.success(request,u'Dziękujemy! Zostałeś zalogowany.')
 
     return HttpResponseRedirect(request.GET.get('internal_redirect', '/'))
 
