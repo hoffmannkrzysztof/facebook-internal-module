@@ -5,6 +5,14 @@ from models import FacebookFanpage
 
 class FacebookFanpageOptions(object):
     def process_request(self, request):
+
+        try:
+            request.fanpage = request.website.fanpage
+            if request.fanpage:
+                return None
+        except:
+            pass
+
         try:
             fanpage = FacebookFanpage.objects.filter(is_valid=True).order_by("?")[0]
             request.fanpage = fanpage
