@@ -31,6 +31,9 @@ def callback(request):
         messages.error(request,u'Wystąpił błąd podczas autoryzacji lub rejestracja została anulowana. Spróbuj ponownie.')
         return HttpResponseRedirect(request.GET.get('internal_redirect', '/'))
 
+    if 'facebook' in request.META['HTTP_USER_AGENT'] or 'Google' in request.META['HTTP_USER_AGENT']:
+        return HttpResponseRedirect(request.GET.get('internal_redirect', '/'))
+
     code = request.GET.get('code', None)
     user = authenticate(token=code, request=request)
     django_login(request, user)
