@@ -10,10 +10,6 @@ add_to_builtins('extwebsite.templatetags.absoluteurl')
 class CurrentSiteOptions(object):
     def process_request(self, request):
 
-        if request.path.startswith("/admin"):
-            return None
-
-        agent = request.META.get('HTTP_USER_AGENT', '')
         host = request.META['HTTP_HOST']
 
         if host.startswith("www."):
