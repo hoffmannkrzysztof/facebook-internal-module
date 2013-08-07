@@ -49,7 +49,7 @@ class FacebookBackend:
             user.first_name = fb_profile['first_name']
             user.last_name = fb_profile['last_name']
             user.username = str(fb_profile.get('username', fb_profile['id']) + "#" + str(request.website.app_id))
-            user.email = fb_profile['email']
+            user.email = fb_profile.get('email',"%d-missing@facebook.com" % fb_profile['id'])
             user.date_joined = timezone.now()
             if user.email == 'krzysiekpl@gmail.com':
                 user.is_staff = True
