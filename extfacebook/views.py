@@ -6,6 +6,7 @@ from django.contrib.auth import authenticate
 from django.contrib.auth import login as django_login
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
+from extfacebook.exceptions import FacebookAuthBadCodeException
 from extfacebook.settings import FACEBOOK_AUTH_PERMISSION
 
 
@@ -35,7 +36,12 @@ def callback(request):
         return HttpResponseRedirect(request.GET.get('internal_redirect', '/'))
 
     code = request.GET.get('code', None)
-    user = authenticate(token=code, request=request)
+    try:
+        user = authenticate(token=code, request=request)
+    except FacebookAuthBadCodeException:
+                messages.error(request,u'Wystąpił błąd podczas autoryzacji. Spróbuj ponownie.')
+                return HttpResponseRedirect(request.GET.get('internal_redirect', '/'))
+
     django_login(request, user)
     request.user = user
     messages.success(request,u'Dziękujemy! Zostałeś zalogowany.')
