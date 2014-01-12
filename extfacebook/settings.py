@@ -1,9 +1,6 @@
 from django.conf import settings
 
-#permission = ['email','user_likes','user_hometown','user_location','user_birthday','user_online_presence',
-#              'publish_actions','read_stream']
-
-permission = ['email','user_likes','user_birthday',]
+permission = ['email', ]
 
 FACEBOOK_AUTH_PERMISSION = getattr(settings,'FACEBOOK_AUTH_PERMISSION',permission)
 
