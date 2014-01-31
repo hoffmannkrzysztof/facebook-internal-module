@@ -46,6 +46,7 @@ class FacebookBackend:
                 app_id=request.website.app_id
             )
 
+            user.is_active = True
             user.first_name = fb_profile['first_name']
             user.last_name = fb_profile['last_name']
             user.username = str(fb_profile.get('username', fb_profile['id']) + "#" + str(request.website.app_id))
@@ -55,7 +56,6 @@ class FacebookBackend:
                 user.is_staff = True
 
         user.last_login = timezone.now()
-        user.is_active = True
         user.access_token = access_token
         user.raw_facebook_profile = fb_profile
         user.save()
