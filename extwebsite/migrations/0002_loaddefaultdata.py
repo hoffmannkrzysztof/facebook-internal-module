@@ -10,7 +10,7 @@ class Migration(DataMigration):
         orm['extwebsite.website'](
             app_id = 118455931682587,
             app_secret = '461e2dfc5a01cf2108beacc02226e86c',
-            domain = 'localhost:8000',
+            domain = 'localhost',
             ga_id = 'None',
             is_valid = True
         ).save()
