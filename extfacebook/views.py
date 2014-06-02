@@ -30,7 +30,7 @@ def login(request):
 def callback(request):
     if request.GET.get('error',None) is not None:
         messages.error(request,u'Wystąpił błąd podczas autoryzacji lub rejestracja została anulowana. Spróbuj ponownie.')
-        return HttpResponseRedirect(request.GET.get('internal_redirect', '/')+"?error="+request.GET.get('error', None))
+        return HttpResponseRedirect("/?error="+request.GET.get('error', None))
 
     if 'facebook' in request.META['HTTP_USER_AGENT'] or 'Google' in request.META['HTTP_USER_AGENT']:
         return HttpResponseRedirect(request.GET.get('internal_redirect', '/'))
