@@ -1,5 +1,8 @@
 from django.http import HttpResponseRedirect
-from django.template.loader import add_to_builtins
+try:
+    from django.template.loader import add_to_builtins
+except ImportError:
+    from django.template.base import add_to_builtins
 from urlparse import urlparse
 from django.core.cache import cache
 
