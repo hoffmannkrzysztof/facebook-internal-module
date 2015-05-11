@@ -36,13 +36,13 @@ class FacebookBackend:
 
         try:
             user = ExtendedUser.objects.get(
-                email=fb_profile['email'],
+                facebook_id=fb_profile['id'],
                 app_id=request.website.app_id
             )
         except ExtendedUser.DoesNotExist:
 
             user = ExtendedUser(
-                email=fb_profile['email'],
+                facebook_id=fb_profile['id'],
                 app_id=request.website.app_id
             )
 
