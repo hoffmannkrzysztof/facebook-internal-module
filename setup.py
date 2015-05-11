@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name = 'facebook-internal-module',
-    version = '0.1.1',
+    version = '0.1.2',
     author = 'Krzysztof Hoffmann',
     author_email = 'krzysiekpl@gmail.com',
     license='BSD',
