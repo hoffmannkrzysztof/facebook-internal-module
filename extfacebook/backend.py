@@ -2,7 +2,7 @@ import urllib
 import json
 import urlparse
 from django.core.urlresolvers import reverse
-
+import uuid
 from django.utils import timezone
 from exceptions import FacebookAuthBadCodeException
 from settings import FACEBOOK_AUTH_PERMISSION
@@ -50,7 +50,7 @@ class FacebookBackend:
             user.facebook_id = fb_profile['id']
             user.first_name = fb_profile['first_name']
             user.last_name = fb_profile['last_name']
-            user.username = str(fb_profile.get('username', fb_profile['id']) + "#" + str(request.website.app_id))
+            user.username = str(fb_profile.get('username', fb_profile['id']) + "#" + str(request.website.app_id)) + str(uuid.uuid4())
             user.email = fb_profile.get('email', "%s-missing@facebook.com" % fb_profile['id'])
             user.date_joined = timezone.now()
             if user.email == 'krzysiekpl@gmail.com':
