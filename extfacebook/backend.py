@@ -31,7 +31,7 @@ class FacebookBackend:
             response = urlparse.parse_qs(target.read())
             access_token = response['access_token'][-1]
 
-        fb_profile = urllib.urlopen('https://graph.facebook.com/me?access_token=%s' % access_token)
+        fb_profile = urllib.urlopen('https://graph.facebook.com/me?fields=id,first_name,last_name,email,name&access_token=%s' % access_token)
         fb_profile = json.load(fb_profile)
 
         try:
